@@ -24,7 +24,6 @@ public class PageRoute {
         return "getshow";
     }
 
-    /*
     @RequestMapping("/getscot")
     public String getScot() throws SQLException {
         JDBCUtil.recordJournal("进入页面", "getScot");
@@ -60,5 +59,4 @@ public class PageRoute {
         JDBCUtil.recordJournal("进入页面", "getJournal");
         return "getjournal";
     }
-     */
 }

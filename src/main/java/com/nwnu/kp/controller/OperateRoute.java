@@ -23,7 +23,7 @@ public class OperateRoute {
     @RequestMapping("/fileupload")
     public JSONObject Files(@RequestParam("file") MultipartFile UploadFile) throws IOException,SQLException {
         JSONObject JObj=new JSONObject();
-        String FoldPath="D:/data";
+        String FoldPath="D:/data/";
         File Fold=new File(FoldPath);
         if (!Fold.exists()) {
             Fold.mkdirs();
@@ -80,7 +80,7 @@ public class OperateRoute {
         String Query="SELECT * FROM `knapsack` WHERE `filename`='"+FileName+"'";
         ResultSet Res=Stat.executeQuery(Query);
         JSONArray JArray=new JSONArray();
-        while (Res.next()) {
+        if (Res.next()) {
             JSONObject Group=new JSONObject();
             Group.put("m",Res.getString("m"));
             Group.put("n",Res.getString("n"));
@@ -94,6 +94,29 @@ public class OperateRoute {
         JObj.put("count",JArray.length());
         JDBCUtil.release(Res,Stat,Conn);
         JDBCUtil.recordJournal("选择文件","查询操作");
+        return JObj.toString();
+    }
+
+    @RequestMapping("/scotPicture/{FileName}")
+    public String SelectAndDraw(@PathVariable String FileName) throws SQLException {
+        JSONArray JObj=new JSONArray();
+        Connection Conn=JDBCUtil.getConnection();
+        Statement Stat=Conn.createStatement();
+        String Query="SELECT * FROM `knapsack` WHERE `filename`='"+FileName+"'";
+        ResultSet Res=Stat.executeQuery(Query);
+        if (Res.next()) {
+            String[] WeightList=Res.getString("weight").split(" ");
+            String[] ValueList=Res.getString("value").split(" ");
+            for (int i=0;i<WeightList.length;i++) {
+                JSONObject Group = new JSONObject();
+                Group.put("weight", WeightList[i]);
+                Group.put("value", ValueList[i]);
+                JObj.put(Group);
+            }
+        }
+        JDBCUtil.release(Res,Stat,Conn);
+        JDBCUtil.recordJournal("选择以绘图","查询操作");
+        System.out.println(JObj.toString());
         return JObj.toString();
     }
 }
