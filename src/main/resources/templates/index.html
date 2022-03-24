@@ -1,0 +1,109 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" >
+<head>
+	<meta charset="utf-8" />
+	<title>首页</title>
+	<link rel="stylesheet" href="//unpkg.com/layui@2.6.4/dist/css/layui.css"></css>
+	<script src="//unpkg.com/layui@2.6.4/dist/layui.js"></script>
+	</head>
+<body>
+	<div class="layui-layout-admin">
+		<div class="layui-header" style="background-color:#2F4056" th:fragment="top">
+			<a class="layui-logo" style="color: white;font-size: 20px">背包问题</a>
+		</div>
+		<div class="layui-side layui-bg-black" style="background-color:#2F4056" th:fragment="left">
+			<ul class="layui-nav layui-nav-tree  nav" lay-filter="navigation" style="font-size: 30px">
+				<li class="layui-nav-item" >
+					<a th:href="@{/}">
+						<i class="layui-icon layui-icon-home" style="color:#009688;font-size: 20px"></i>
+						首页
+					</a>
+				</li>
+				<li class="layui-nav-item" >
+					<a th:href="@{/getfile}">
+						<i class="layui-icon layui-icon-upload-drag" style="color:#009688;font-size: 20px"></i>
+						数据上传
+					</a>
+				</li>
+				<li class="layui-nav-item">
+					<a th:href="@{/getshow}">
+						<i class="layui-icon layui-icon-list" style="color:#1E9FFF;font-size: 20px"></i>
+						显示数据
+					</a>
+				</li>
+				<li class="layui-nav-item">
+					<a th:href="@{/getscot}">
+						<i class="layui-icon layui-icon-chart" style="color:#FFB800;font-size: 20px"></i>
+						绘制散点图
+					</a>
+				</li>
+				<li class="layui-nav-item">
+					<a th:href="@{/getsort}">
+						<i class="layui-icon layui-icon-circle" style="color:#FF5722;font-size: 20px"></i>
+						排序
+					</a>
+				</li>
+				<li class="layui-nav-item">
+					<a th:href="@{/getdynamic}">
+						<i class="layui-icon layui-icon-circle" style="color:#01AAED;font-size: 20px"></i>
+						动态规划算法
+					</a>
+				</li>
+				<li class="layui-nav-item">
+					<a th:href="@{/getbacktrack}">
+						<i class="layui-icon layui-icon-circle" style="color:#01AAED;font-size: 20px"></i>
+						回溯算法
+					</a>
+				</li>
+				<li class="layui-nav-item">
+					<a th:href="@{/getgenetic}">
+						<i class="layui-icon layui-icon-circle" style="color:#01AAED;font-size: 20px"></i>
+						遗传算法
+					</a>
+				</li>
+				<li class="layui-nav-item">
+					<a th:href="@{/getjournal}">
+						<i class="layui-icon layui-icon-circle" style="color:#FF5722;font-size: 20px"></i>
+						日志记录
+					</a>
+				</li>
+			</ul>
+		</div>
+		<div class="layui-body" style="padding: 20px;">
+			<button class="layui-btn layui-btn-fluid" style="margin: 20px">
+				<i class="layui-icon layui-icon-rate" style="padding: 20px;color:#FF5722;font-size: 20px"></i>
+				欢迎访问本网页
+			</button>
+			<button class="layui-btn layui-btn-normal layui-btn-fluid" style="margin: 20px">
+				<i class="layui-icon layui-icon-snowflake" style="padding: 20px;color:#20B2AA;font-size: 20px"></i>
+				欢迎访问本网页
+			</button>
+			<button class="layui-btn layui-btn-warm layui-btn-fluid" style="margin: 20px">
+				<i class="layui-icon layui-icon-face-surprised" style="padding: 20px;color:#20B2AA;font-size: 20px"></i>
+				欢迎访问本网页</button>
+			<button class="layui-btn layui-btn-danger layui-btn-fluid" style="margin: 20px">
+				<i class="layui-icon layui-icon-rate" style="padding: 20px;color:#20B2AA;font-size: 20px"></i>
+				欢迎访问本网页</button>
+			<button class="layui-btn layui-btn-fluid" style="margin: 20px">
+				<i class="layui-icon layui-icon-rate" style="padding: 20px;color:#FF5722;font-size: 20px"></i>
+				欢迎访问本网页</button>
+			<button class="layui-btn layui-btn-danger layui-btn-fluid" style="margin: 20px">
+				<i class="layui-icon layui-icon-rate" style="padding: 20px;color:#20B2AA;font-size: 20px"></i>
+				欢迎访问本网页</button>
+			<button class="layui-btn layui-btn-normal layui-btn-fluid" style="margin: 20px">
+				<i class="layui-icon layui-icon-snowflake" style="padding: 20px;color:#20B2AA;font-size: 20px"></i>
+				欢迎访问本网页
+			</button>
+			<button class="layui-btn layui-btn-fluid" style="margin: 20px">
+				<i class="layui-icon layui-icon-rate" style="padding: 20px;color:#FF5722;font-size: 20px"></i>
+				欢迎访问本网页</button>
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+	layui.use('element',function (){
+		var element = layui.element;
+		var $ = layui.jQuery;
+	});
+</script>
+</html>

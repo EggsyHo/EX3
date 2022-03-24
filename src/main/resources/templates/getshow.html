@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>显示数据</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <link rel="stylesheet" href="//unpkg.com/layui@2.6.4/dist/css/layui.css"></head>
+    <script src="//unpkg.com/layui@2.6.4/dist/layui.js"></script>
+</head>
+<body>
+<div class="layui-layout-admin" style="background-color: #00F7DE">
+    <div th:insert="~{index::top}"></div>
+    <div th:insert="~{index::left}"></div>
+    <div class="layui-body" style="background-color: #eeeeee">
+        <script id="toolBarTable">
+            &nbsp;&nbsp;文件列表<br>
+            <button class="layui-btn" lay-event="fileSelected">
+                选择该文件<i class="layui-icon layui-icon-down layui-font-12" ></i>
+            </button>
+        </script>
+        <div style="font-size: medium;">
+            <table id="tableShow" class="layui-table" lay-filter="testTable">
+
+            </table>
+        </div>
+        <script id="toolbar">
+            详细数据
+        </script>
+        <table id="tableGroup" class="layui-table" lay-filter="groupTable">
+
+        </table>
+    </div>
+</div>
+</body>
+<script>
+    layui.use('table',function() {
+        var table = layui.table;
+
+        //第一个实例
+        table.render({
+            elem: '#tableShow',
+            url: '/selectFile', //数据接口
+            page: true, //开启分页
+            cols:[
+                [{field:'aa',type:"checkbox"},//设置复选框
+                 {field:'id',title:'序号',type:"numbers"},
+                 {field:'filename', title: '文件名', }]
+            ],
+            toolbar:'#toolBarTable'
+        });
+
+        table.on('toolbar(testTable)',function (obj){
+            var checkStatus=table.checkStatus(obj.config.id);
+            var arrLength=checkStatus.data.length;
+            if (arrLength>1){
+                layer.msg("您只能选择一条数据，请重新勾选");
+            }else if(arrLength==0){
+                layer.msg("您必须选择一条数据");
+            }else{//在数据表格中添加数据
+                var filename=checkStatus.data[0].filename;
+                table.render({
+                    elem:'#tableGroup',
+                    url:'/selectGroup/'+filename,
+                    page: true,//开启分页
+                    toolbar:'#toolbar',
+                    cols:[
+                        [{field:'aa',type:"checkbox",align:'center'},
+                        {field:'id',title:'序号',type:"numbers",width:50,align:'center'}, //设置复选框
+                        {field:'m',title:'背包容量',width: 80,align:'center'},
+                        {field: 'n',title:'物品数量',width: 90,align:'center'},
+                        {field:'weight',title:'重量',align:'center'},
+                        {field:'value',title:'价值',align:'center'}]
+                    ]
+                })
+            }
+        });
+    });
+</script>
+</html>
