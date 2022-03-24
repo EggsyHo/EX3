@@ -36,9 +36,9 @@ public class PageRoute {
         return "getsort";
     }
 
-    @RequestMapping("/getdynamic")
+    @RequestMapping("/getdp")
     public String getDynamic() throws SQLException {
-        JDBCUtil.recordJournal("进入页面", "getDynamic");
+        JDBCUtil.recordJournal("进入页面", "getdp");
         return "getdp";
     }
 

@@ -54,31 +54,19 @@
             }else if(arrLength==0) {
                 layer.msg("您必须选择一个文件");
             }else{
-                layer.prompt({
-                    formType: 1,
-                    value: '1',
-                    title: '请输入查看的组数(1-10)',
-                }, function(value, index, elem){
-                    layer.close(index);
-                    value=parseInt(value);
-                    if (value>=1&&value<=10) {//在数据表格中添加数据
-                        var filename = checkStatus.data[0].filename;
-                        table.render({
-                            elem: '#tableGroup',
-                            url: '/dynamic/' + filename + '/' + value,
-                            page: true,//开启分页
-                            cols: [
-                                [{field: 'aa', type: "checkbox",align:'center'},//设置复选框
-                                    {field: 'id', title: '序号', type: "numbers",align:'center'},
-                                    {field: 'group', title: '组号',align:'center'},
-                                    {field: 'filename',title: "文件名",align:'center'},
-                                    {field: 'time', title: '时间',align:'center'},
-                                    {field: 'maxvalue', title: '最大价值',align:'center'}]
-                            ]
-                        });
-                    } else{
-                        layer.msg("请输入1-10的任意一个数字");
-                    }
+                var filename = checkStatus.data[0].filename;
+                table.render({
+                    elem: '#tableGroup',
+                    url: '/dynamic/' + filename,
+                    page: true,//开启分页
+                    cols: [
+                        [{field: 'aa', type: "checkbox",align:'center'},//设置复选框
+                            {field: 'id', title: '序号', type: "numbers",align:'center'},
+                            {field: 'filename',title: "文件名",align:'center'},
+                            {field: 'time', title: '时间（s）',align:'center'},
+                            {field: 'maxvalue', title: '最大价值',align:'center'},
+                            {field: 'anspath', title: '解向量',align:'center'}]
+                    ]
                 });
             }
         });

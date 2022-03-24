@@ -9,10 +9,17 @@
 <body>
 	<div class="layui-layout-admin">
 		<div class="layui-header" style="background-color:#2F4056" th:fragment="top">
-			<a class="layui-logo" style="color: white;font-size: 20px">背包问题</a>
+			<div class="layui-logo layui-bg-black" style="font-size: 20px;">0-1背包问题</div>
+			<ul class="layui-nav layui-layout-right">
+				<li class="layui-nav-item" lay-header-event="menuRight" lay-unselect>
+					<a href="javascript:;">
+						<i class="layui-icon layui-icon-more-vertical"></i>
+					</a>
+				</li>
+			</ul>
 		</div>
 		<div class="layui-side layui-bg-black" style="background-color:#2F4056" th:fragment="left">
-			<ul class="layui-nav layui-nav-tree  nav" lay-filter="navigation" style="font-size: 30px">
+			<ul class="layui-nav layui-nav-tree nav" lay-filter="navigation" style="font-size: 30px">
 				<li class="layui-nav-item" >
 					<a th:href="@{/}">
 						<i class="layui-icon layui-icon-home" style="color:#009688;font-size: 20px"></i>
@@ -43,23 +50,25 @@
 						排序
 					</a>
 				</li>
-				<li class="layui-nav-item">
-					<a th:href="@{/getdp}">
-						<i class="layui-icon layui-icon-circle" style="color:#01AAED;font-size: 20px"></i>
-						动态规划算法
+				<li class="layui-nav-item layui-nav-itemed">
+					<a href="javascript:;">
+						<i class="layui-icon layui-icon-chart" style="color:#01AAED;font-size: 20px"></i>
+						算法求解
 					</a>
-				</li>
-				<li class="layui-nav-item">
-					<a th:href="@{/getbacktrack}">
-						<i class="layui-icon layui-icon-circle" style="color:#01AAED;font-size: 20px"></i>
-						回溯算法
-					</a>
-				</li>
-				<li class="layui-nav-item">
-					<a th:href="@{/getgenetic}">
-						<i class="layui-icon layui-icon-circle" style="color:#01AAED;font-size: 20px"></i>
-						遗传算法
-					</a>
+					<dl class="layui-nav-child">
+						<dd><a th:href="@{/getdp}">
+							<i class="layui-icon layui-icon-more" style="color:#01AAED;font-size: 20px"></i>
+							动态规划算法
+						</a></dd>
+						<dd><a th:href="@{/getbacktrack}">
+							<i class="layui-icon layui-icon-more" style="color:#01AAED;font-size: 20px"></i>
+							回溯算法
+						</a></dd>
+						<dd><a th:href="@{/getgenetic}">
+							<i class="layui-icon layui-icon-more" style="color:#01AAED;font-size: 20px"></i>
+							遗传算法
+						</a></dd>
+					</dl>
 				</li>
 				<li class="layui-nav-item">
 					<a th:href="@{/getjournal}">
@@ -70,40 +79,66 @@
 			</ul>
 		</div>
 		<div class="layui-body" style="padding: 20px;">
-			<button class="layui-btn layui-btn-fluid" style="margin: 20px">
-				<i class="layui-icon layui-icon-rate" style="padding: 20px;color:#FF5722;font-size: 20px"></i>
-				欢迎访问本网页
-			</button>
-			<button class="layui-btn layui-btn-normal layui-btn-fluid" style="margin: 20px">
-				<i class="layui-icon layui-icon-snowflake" style="padding: 20px;color:#20B2AA;font-size: 20px"></i>
-				欢迎访问本网页
-			</button>
-			<button class="layui-btn layui-btn-warm layui-btn-fluid" style="margin: 20px">
-				<i class="layui-icon layui-icon-face-surprised" style="padding: 20px;color:#20B2AA;font-size: 20px"></i>
-				欢迎访问本网页</button>
-			<button class="layui-btn layui-btn-danger layui-btn-fluid" style="margin: 20px">
-				<i class="layui-icon layui-icon-rate" style="padding: 20px;color:#20B2AA;font-size: 20px"></i>
-				欢迎访问本网页</button>
-			<button class="layui-btn layui-btn-fluid" style="margin: 20px">
-				<i class="layui-icon layui-icon-rate" style="padding: 20px;color:#FF5722;font-size: 20px"></i>
-				欢迎访问本网页</button>
-			<button class="layui-btn layui-btn-danger layui-btn-fluid" style="margin: 20px">
-				<i class="layui-icon layui-icon-rate" style="padding: 20px;color:#20B2AA;font-size: 20px"></i>
-				欢迎访问本网页</button>
-			<button class="layui-btn layui-btn-normal layui-btn-fluid" style="margin: 20px">
-				<i class="layui-icon layui-icon-snowflake" style="padding: 20px;color:#20B2AA;font-size: 20px"></i>
-				欢迎访问本网页
-			</button>
-			<button class="layui-btn layui-btn-fluid" style="margin: 20px">
-				<i class="layui-icon layui-icon-rate" style="padding: 20px;color:#FF5722;font-size: 20px"></i>
-				欢迎访问本网页</button>
+			<blockquote class="layui-elem-quote" style="padding: 20px;font-size: 18px;">开发时间线</blockquote>
+			<ul class="layui-timeline">
+				<li class="layui-timeline-item">
+					<i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+					<div class="layui-timeline-content layui-text">
+						<h3 class="layui-timeline-title">3月23日</h3>
+						<p>
+							明确开发项目
+							<br>分配开发任务
+						</p>
+					</div>
+				</li>
+				<li class="layui-timeline-item">
+					<i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+					<div class="layui-timeline-content layui-text">
+						<h3 class="layui-timeline-title">3月24日</h3>
+						<p>
+							基础框架搭建
+							<br>完成数据库、文件操作
+						</p>
+					</div>
+				</li>
+				<li class="layui-timeline-item">
+					<i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+					<div class="layui-timeline-content layui-text">
+						<h3 class="layui-timeline-title">3月25日</h3>
+						<p>
+
+						</p>
+					</div>
+				</li>
+				<li class="layui-timeline-item">
+					<i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+					<div class="layui-timeline-content layui-text">
+						<h3 class="layui-timeline-title">3月25日</h3>
+						<p>
+						</p>
+					</div>
+				</li>
+			</ul>
 		</div>
 	</div>
 </body>
 <script type="text/javascript">
-	layui.use('element',function (){
+	layui.use(['element','layer','util'],function (){
 		var element = layui.element;
 		var $ = layui.jQuery;
+		util = layui.util
+		util.event('lay-header-event', {
+			menuRight: function(){
+				layer.open({
+					type: 1
+					,content: '<div style="padding: 50px;text-align: center;">Developed by:<br>何晨泽 & 高杨</div>'
+					,area: ['260px', '30%']
+					,offset: 'rt' //右上角
+					,anim: 5
+					,shadeClose: true
+				});
+			}
+		});
 	});
 </script>
 </html>

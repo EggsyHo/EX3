@@ -1,5 +1,6 @@
 package com.nwnu.kp.controller;
 import com.alibaba.druid.support.spring.stat.annotation.Stat;
+import com.nwnu.kp.utils.AlgorithmUtil;
 import com.nwnu.kp.utils.FilesUtil;
 import com.nwnu.kp.utils.JDBCUtil;
 import org.apache.ibatis.jdbc.SQL;
@@ -145,6 +146,41 @@ public class OperateRoute {
         JObj.put("msg","");
         JDBCUtil.release(Res,Stat,Conn);
         JDBCUtil.recordJournal("选择以排序","查询操作");
+        return JObj.toString();
+    }
+
+    @RequestMapping("/dynamic/{FileName}")
+    public String DP(@PathVariable String FileName) throws SQLException {
+        JSONObject JObj=new JSONObject();
+        Connection Conn=JDBCUtil.getConnection();
+        Statement Stat=Conn.createStatement();
+        String Query="SELECT * FROM `knapsack` WHERE `filename`='"+FileName+"'";
+        ResultSet Res=Stat.executeQuery(Query);
+        AlgorithmUtil AUtil=new AlgorithmUtil();
+        JSONArray JArray=new JSONArray();
+        if (Res.next()) {
+            JSONObject Group=new JSONObject();
+            String[] WeightList=Res.getString("weight").split(" ");
+            String[] ValueList=Res.getString("value").split(" ");
+            int m=Integer.valueOf(Res.getString("m"));
+            int n=Integer.valueOf(Res.getString("n"));
+            AUtil.SaveData(m,n,WeightList,ValueList);
+            long StartTime=System.nanoTime();
+            int Ans=AUtil.DP();
+            long EndTime=System.nanoTime();
+            double RunTime=(EndTime-StartTime)/1000000000.0;
+            String Path=AUtil.getSPath();
+            Group.put("time",RunTime);
+            Group.put("filename",FileName);
+            Group.put("maxvalue",Ans);
+            Group.put("anspath",Path);
+            JArray.put(Group);
+        }
+        JObj.put("data",JArray);
+        JObj.put("code",0);
+        JObj.put("msg","");
+        JDBCUtil.release(Res,Stat,Conn);
+        JDBCUtil.recordJournal("动态规划","查询操作");
         return JObj.toString();
     }
 }
