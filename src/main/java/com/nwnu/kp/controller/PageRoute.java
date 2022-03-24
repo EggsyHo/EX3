@@ -39,7 +39,7 @@ public class PageRoute {
     @RequestMapping("/getdynamic")
     public String getDynamic() throws SQLException {
         JDBCUtil.recordJournal("进入页面", "getDynamic");
-        return "getdynamic";
+        return "getdp";
     }
 
     @RequestMapping("/getbacktrack")

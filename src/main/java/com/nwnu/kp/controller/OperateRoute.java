@@ -116,7 +116,35 @@ public class OperateRoute {
         }
         JDBCUtil.release(Res,Stat,Conn);
         JDBCUtil.recordJournal("选择以绘图","查询操作");
-        System.out.println(JObj.toString());
+        return JObj.toString();
+    }
+
+    @RequestMapping("/selectSort/{FileName}")
+    public String SelectSort(@PathVariable String FileName) throws SQLException {
+        JSONObject JObj=new JSONObject();
+        Connection Conn=JDBCUtil.getConnection();
+        Statement Stat=Conn.createStatement();
+        String Query="SELECT * FROM `knapsack` WHERE `filename`='"+FileName+"'";
+        ResultSet Res=Stat.executeQuery(Query);
+        JSONArray JArray=new JSONArray();
+        if (Res.next()) {
+            String[] WeightList=Res.getString("weight").split(" ");
+            String[] ValueList=Res.getString("value").split(" ");
+            for (int i=0;i<WeightList.length;i++) {
+                JSONObject Group = new JSONObject();
+                double Rate=Double.parseDouble(ValueList[i])/Double.parseDouble(WeightList[i]);
+                Group.put("weight", WeightList[i]);
+                Group.put("value", ValueList[i]);
+                Group.put("rate",Rate);
+                JArray.put(Group);
+            }
+            JObj.put("count",WeightList.length);
+        }
+        JObj.put("data",JArray);
+        JObj.put("code",0);
+        JObj.put("msg","");
+        JDBCUtil.release(Res,Stat,Conn);
+        JDBCUtil.recordJournal("选择以排序","查询操作");
         return JObj.toString();
     }
 }

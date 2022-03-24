@@ -2,9 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>排序</title>
+    <title>动态规划算法求解</title>
     <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <!-- 引入 layui.css -->
     <link rel="stylesheet" href="//unpkg.com/layui@2.6.4/dist/css/layui.css"></head>
+    <!-- 引入 layui.js -->
     <script src="//unpkg.com/layui@2.6.4/dist/layui.js"></script>
 </head>
 <body>
@@ -22,18 +24,16 @@
             <table id="tableShow" class="layui-table" lay-filter="testTable">
 
             </table>
-            <table id="tableGroup" class="layui-table" lay-filter="groupTable">
-
-            </table>
         </div>
+        <table id="tableGroup" class="layui-table" lay-filter="groupTable">
 
+        </table>
     </div>
 </div>
 </body>
 <script>
     layui.use('table',function() {
         var table = layui.table;
-
         //第一个实例
         table.render({
             elem: '#tableShow',
@@ -54,25 +54,34 @@
             }else if(arrLength==0) {
                 layer.msg("您必须选择一个文件");
             }else{
-                var filename = checkStatus.data[0].filename;
-                table.render({
-                    elem: '#tableGroup',
-                    initSort: {
-                        field: 'rate',
-                        type: 'asc'
-                    },
-                    url: '/selectSort/'+filename,
-                    page: true,//开启分页
-                    cols: [
-                        [{field: 'aa', type: "checkbox",align:'center'},//设置复选框
-                            {field: 'id', title: '序号', type: "numbers",align:'center'},
-                            {field:'rate',title: "价值重量比",sort:true,width:200,align:'center'},
-                            {field: 'weight', title: '重量',align:'center'},
-                            {field: 'value', title: '价值',align:'center'}]
-                    ]
+                layer.prompt({
+                    formType: 1,
+                    value: '1',
+                    title: '请输入查看的组数(1-10)',
+                }, function(value, index, elem){
+                    layer.close(index);
+                    value=parseInt(value);
+                    if (value>=1&&value<=10) {//在数据表格中添加数据
+                        var filename = checkStatus.data[0].filename;
+                        table.render({
+                            elem: '#tableGroup',
+                            url: '/dynamic/' + filename + '/' + value,
+                            page: true,//开启分页
+                            cols: [
+                                [{field: 'aa', type: "checkbox",align:'center'},//设置复选框
+                                    {field: 'id', title: '序号', type: "numbers",align:'center'},
+                                    {field: 'group', title: '组号',align:'center'},
+                                    {field: 'filename',title: "文件名",align:'center'},
+                                    {field: 'time', title: '时间',align:'center'},
+                                    {field: 'maxvalue', title: '最大价值',align:'center'}]
+                            ]
+                        });
+                    } else{
+                        layer.msg("请输入1-10的任意一个数字");
+                    }
                 });
             }
-       });
+        });
     });
 </script>
 </html>
