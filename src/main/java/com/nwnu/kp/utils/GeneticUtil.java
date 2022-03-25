@@ -241,12 +241,11 @@ public class GeneticUtil {
             }
             CountProb();
         }
-
     }
 
     public int Genetic() {
         Init();
-        RunGenetic();
+
         SPath="{";
         for (int i=0;i<CLength;i++) {
             if (i!=CLength-1) SPath+=BestTour[i]+",";
