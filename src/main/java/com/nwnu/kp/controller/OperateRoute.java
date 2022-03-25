@@ -289,6 +289,30 @@ public class OperateRoute {
         JDBCUtil.recordJournal("基因","查询操作");
         return JObj.toString();
     }
+
+    @RequestMapping("/journalShow")
+    public String journalShow() throws SQLException {
+        JSONObject JObj = new JSONObject();
+        Connection Conn = JDBCUtil.getConnection();
+        Statement Stat = Conn.createStatement();
+        String Query = "SELECT * FROM `journal`";
+        ResultSet Res = Stat.executeQuery(Query);
+        JSONArray JArray = new JSONArray();
+        while (Res.next()) {
+            JSONObject Group = new JSONObject();
+            Group.put("operation", Res.getString("operation"));
+            Group.put("command", Res.getString("command"));
+            Group.put("time", Res.getString("time"));
+            JArray.put(Group);
+        }
+        JObj.put("data", JArray);
+        JObj.put("count", JArray.length());
+        JObj.put("code", 0);
+        JObj.put("msg", "");
+        JDBCUtil.release(Res, Stat, Conn);
+        JDBCUtil.recordJournal("打印日志数据", "查询操作");
+        return JObj.toString();
+    }
 }
 
 
