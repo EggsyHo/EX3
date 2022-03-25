@@ -1,7 +1,5 @@
 package com.nwnu.kp.utils;
 
-import javax.xml.crypto.Data;
-
 public class AlgorithmUtil {
     static int Weight[];
     static int Value[];
@@ -151,8 +149,6 @@ public class AlgorithmUtil {
         }
         return Ans;
     }
-
-
 
     public String getSPath() {
         return SPath;
