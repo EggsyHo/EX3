@@ -42,10 +42,16 @@ public class PageRoute {
         return "getdp";
     }
 
-    @RequestMapping("/getbacktrack")
-    public String getBacktrack() throws SQLException {
-        JDBCUtil.recordJournal("进入页面", "getBacktrack");
-        return "getbacktrack";
+    @RequestMapping("/getdfs")
+    public String getDFS() throws SQLException {
+        JDBCUtil.recordJournal("进入页面", "getdfs");
+        return "getdfs";
+    }
+
+    @RequestMapping("/getgreedy")
+    public String getGreedy() throws SQLException {
+        JDBCUtil.recordJournal("进入页面", "getgreedy");
+        return "getgreedy";
     }
 
     @RequestMapping("/getgenetic")
