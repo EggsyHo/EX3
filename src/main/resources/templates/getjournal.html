@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>日志记录</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <link rel="stylesheet" href="//unpkg.com/layui@2.6.4/dist/css/layui.css"></head>
+    <script src="//unpkg.com/layui@2.6.4/dist/layui.js"></script>
+</head>
+<body>
+<div class="layui-layout-admin" style="background-color: #00F7DE">
+    <div th:insert="~{index::top}"></div>
+    <div th:insert="~{index::left}"></div>
+    <div class="layui-body" style="background-color: #eeeeee">
+        <div style="padding: 15px;">
+            <table id="tableShow" class="layui-table" lay-filter="testTable">
+
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    layui.use('table',function() {
+        var table = layui.table;
+
+        //第一个实例
+        table.render({
+            elem: '#tableShow',
+            url: '/journalShow', //数据接口
+            page: true, //开启分页
+            cols: [
+                [{field: 'aa', type: "checkbox",align:'center'},//设置复选框
+                 {field: 'id', title: '序号', type: "numbers",align:'center'},
+                 {field: 'operation', title: '操作',align:'center'},
+                 {field: 'command', title: '命令',align:'center'},
+                 {field: 'time', title: '操作时间',align:'center'}]
+            ]
+        });
+    });
+</script>
+</html>
