@@ -69,10 +69,52 @@
                         }
                         console.log(data);
                         option = {
-                            xAxis: {},
-                            yAxis: {},
+                            title: {
+                                text: '散点图',
+                                left: '5%',
+                                top: '3%'
+                            },
+                            legend: {
+                                right: '10%',
+                                top: '3%',
+                                data: ['1990', '2015']
+                            },
+                            grid: {
+                                left: '8%',
+                                top: '10%'
+                            },
+                            xAxis: {
+                                splitLine: {
+                                    lineStyle: {
+                                        type: 'dashed'
+                                    }
+                                }
+                            },
+                            yAxis: {
+                                splitLine: {
+                                    lineStyle: {
+                                        type: 'dashed'
+                                    }
+                                },
+                                scale: true
+                            },
                             series: [{
                                 symbolSize: 8,
+                                itemStyle: {
+                                    shadowBlur: 10,
+                                    shadowColor: 'rgba(25, 100, 150, 0.5)',
+                                    shadowOffsetY: 5,
+                                    color: new echarts.graphic.RadialGradient(0.4, 0.3, 1, [
+                                        {
+                                            offset: 0,
+                                            color: 'rgb(129, 227, 238)'
+                                        },
+                                        {
+                                            offset: 1,
+                                            color: 'rgb(25, 183, 207)'
+                                        }
+                                    ])
+                                },
                                 data: data,
                                 type: 'scatter'
                             }]
